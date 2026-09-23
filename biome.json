@@ -11,7 +11,6 @@
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab",
-		"useEditorconfig": true,
 		"lineEnding": "lf"
 	},
 	"assist": { "actions": { "source": { "organizeImports": "on" } } },
