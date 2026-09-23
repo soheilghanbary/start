@@ -1,10 +1,11 @@
-import type { ReactNode } from 'react'
 import {
-	Outlet,
 	createRootRoute,
 	HeadContent,
+	Outlet,
 	Scripts,
 } from '@tanstack/react-router'
+import { ThemeProvider } from '@/components/providers/theme-provider'
+import styles from '../styles/globals.css?url'
 
 export const Route = createRootRoute({
 	head: () => ({
@@ -20,26 +21,26 @@ export const Route = createRootRoute({
 				title: 'TanStack Start Starter',
 			},
 		],
+		links: [
+			{
+				rel: 'stylesheet',
+				href: styles,
+			},
+		],
 	}),
 	component: RootComponent,
 })
 
 function RootComponent() {
 	return (
-		<RootDocument>
-			<Outlet />
-		</RootDocument>
-	)
-}
-
-function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
-	return (
-		<html>
+		<html lang="en" suppressHydrationWarning>
 			<head>
 				<HeadContent />
 			</head>
 			<body>
-				{children}
+				<ThemeProvider>
+					<Outlet />
+				</ThemeProvider>
 				<Scripts />
 			</body>
 		</html>

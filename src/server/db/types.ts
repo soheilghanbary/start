@@ -1,11 +1,5 @@
 import type { InferInsertModel, InferSelectModel } from 'drizzle-orm'
-import type {
-  category,
-  conversation,
-  message,
-  post,
-  user,
-} from './schema'
+import type { category, conversation, message, post, user } from './schema'
 
 export type User = InferSelectModel<typeof user>
 export type NewUser = InferInsertModel<typeof user>

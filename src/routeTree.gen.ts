@@ -9,78 +9,78 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc.$'
+import { Route as IndexRouteImport } from './routes/index'
 
 const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
+	id: '/',
+	path: '/',
+	getParentRoute: () => rootRouteImport,
 } as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
-  id: '/api/rpc/$',
-  path: '/api/rpc/$',
-  getParentRoute: () => rootRouteImport,
+	id: '/api/rpc/$',
+	path: '/api/rpc/$',
+	getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/api/rpc/$': typeof ApiRpcSplatRoute
+	'/': typeof IndexRoute
+	'/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/api/rpc/$': typeof ApiRpcSplatRoute
+	'/': typeof IndexRoute
+	'/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/api/rpc/$': typeof ApiRpcSplatRoute
+	__root__: typeof rootRouteImport
+	'/': typeof IndexRoute
+	'/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/rpc/$'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/rpc/$'
-  id: '__root__' | '/' | '/api/rpc/$'
-  fileRoutesById: FileRoutesById
+	fileRoutesByFullPath: FileRoutesByFullPath
+	fullPaths: '/' | '/api/rpc/$'
+	fileRoutesByTo: FileRoutesByTo
+	to: '/' | '/api/rpc/$'
+	id: '__root__' | '/' | '/api/rpc/$'
+	fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  ApiRpcSplatRoute: typeof ApiRpcSplatRoute
+	IndexRoute: typeof IndexRoute
+	ApiRpcSplatRoute: typeof ApiRpcSplatRoute
 }
 
 declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/rpc/$': {
-      id: '/api/rpc/$'
-      path: '/api/rpc/$'
-      fullPath: '/api/rpc/$'
-      preLoaderRoute: typeof ApiRpcSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-  }
+	interface FileRoutesByPath {
+		'/': {
+			id: '/'
+			path: '/'
+			fullPath: '/'
+			preLoaderRoute: typeof IndexRouteImport
+			parentRoute: typeof rootRouteImport
+		}
+		'/api/rpc/$': {
+			id: '/api/rpc/$'
+			path: '/api/rpc/$'
+			fullPath: '/api/rpc/$'
+			preLoaderRoute: typeof ApiRpcSplatRouteImport
+			parentRoute: typeof rootRouteImport
+		}
+	}
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  ApiRpcSplatRoute: ApiRpcSplatRoute,
+	IndexRoute: IndexRoute,
+	ApiRpcSplatRoute: ApiRpcSplatRoute,
 }
 export const routeTree = rootRouteImport
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+	._addFileChildren(rootRouteChildren)
+	._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+
 declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
+	interface Register {
+		ssr: true
+		router: Awaited<ReturnType<typeof getRouter>>
+	}
 }
