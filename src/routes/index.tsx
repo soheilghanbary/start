@@ -5,9 +5,9 @@ import { Fragment } from 'react'
 import { ModeToggle } from '@/components/mode-toggle'
 import { OAuthButton } from '@/components/oauth-button'
 import { Separator } from '@/components/ui/separator'
-import { useSession } from '@/lib/auth-client'
-import { orpc } from '@/orpc/client'
-import { helloProducer } from '@/orpc/router'
+import { useSession } from '@/lib/auth/client'
+import { orpc } from '@/lib/orpc/client'
+import { helloProducer } from '@/lib/orpc/router'
 
 export const Route = createFileRoute('/')({
 	component: Home,
@@ -34,13 +34,15 @@ function Home() {
 				<hr className="my-2" />
 				<span>Response on Client:</span>
 				<pre>{JSON.stringify(clientData) || 'null'}</pre>
-				{session.data && (
+				{session.data ? (
 					<Fragment>
 						<hr className="my-2" />
 						<p className="font-medium text-foreground">
 							Hello {session.data?.user.name}
 						</p>
 					</Fragment>
+				) : (
+					<p className="mt-2">User is not signed in</p>
 				)}
 			</div>
 		</div>
