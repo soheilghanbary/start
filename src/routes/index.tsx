@@ -6,8 +6,8 @@ import { ModeToggle } from '@/components/mode-toggle'
 import { OAuthButton } from '@/components/oauth-button'
 import { Separator } from '@/components/ui/separator'
 import { useSession } from '@/lib/auth-client'
-import { orpc } from '@/server/orpc/client'
-import { helloProducer } from '@/server/orpc/router'
+import { orpc } from '@/orpc/client'
+import { helloProducer } from '@/orpc/router'
 
 export const Route = createFileRoute('/')({
 	component: Home,
